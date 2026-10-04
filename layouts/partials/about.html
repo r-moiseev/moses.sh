@@ -1,0 +1,12 @@
+<div class="aside__about">
+  <h1 class="about__title">{{ .Site.Params.about.name }}</h1>
+  <p class="about__role">{{ .Site.Params.about.role }}</p>
+  <p class="about__city">{{ .Site.Params.about.city }}</p>
+</div>
+<ul class="aside__contacts">
+  {{ range .Site.Params.contacts }}{{ if .url }}
+  <li><a href="{{ .url }}" rel="me">{{ i18n .key }}</a></li>
+  {{ end }}{{ end }}
+  {{ with .OutputFormats.Get "rss" }}<li><a href="{{ .Permalink }}">{{ i18n "rss" }}</a></li>{{ end }}
+  {{ range .Translations }}<li><a href="{{ .RelPermalink }}" hreflang="{{ .Language.Lang }}">{{ i18n "switch_lang" }}</a></li>{{ end }}
+</ul>
