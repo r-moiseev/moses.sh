@@ -1,0 +1,19 @@
+{{ define "main" }}
+<h1>{{ .Title }}</h1>
+{{ with .Site.Taxonomies.series }}
+<p>{{ i18n "series" }}:
+  {{ range $i, $t := . }}{{ if $i }} · {{ end }}<a href="{{ $t.Page.RelPermalink }}">{{ $t.Page.Title }}</a>{{ end }}
+</p>
+{{ end }}
+<ul class="post-list">
+  {{ range .Pages }}
+  <li>
+    <span class="date">{{ .Date.Format "2006-01-02" }}</span> ·
+    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+    {{ with .Description }}<br>{{ . }}{{ end }}
+    {{ with .GetTerms "series" }}<br><span class="series">{{ range . }}<a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}</span>{{ end }}
+  </li>
+  {{ end }}
+</ul>
+{{ end }}
+{{ define "aside" }}{{ end }}

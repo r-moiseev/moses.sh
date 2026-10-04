@@ -1,0 +1,20 @@
+{{ define "main" }}
+<article>
+  <header class="content__header">
+    <h1>{{ .Title }}</h1>
+    <p class="post__meta">
+      <span class="date">{{ .Date.Format "2006-01-02" }}</span>
+      {{ with .GetTerms "series" }} · {{ range . }}<a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>{{ end }}{{ end }}
+    </p>
+  </header>
+  <div class="content__body">
+    {{ .Content }}
+  </div>
+  <footer class="content__footer">
+    {{ with .Params.discuss }}<p><a href="{{ . }}">{{ i18n "discuss" }}</a></p>{{ end }}
+  </footer>
+</article>
+{{ end }}
+{{ define "aside" }}
+  {{ if and .Params.toc .TableOfContents }}{{ .TableOfContents }}{{ end }}
+{{ end }}
