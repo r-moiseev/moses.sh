@@ -1,0 +1,29 @@
+<title>{{ with .Title }}{{ if not $.IsHome }}{{ . }} &ndash; {{ end }}{{ end }}{{ .Site.Title }}</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{{ with .Description }}<meta name="description" content="{{ . }}">{{ end }}
+{{ range .Translations }}<link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}">{{ end }}
+<link rel="canonical" href="{{ .Permalink }}">
+{{ $palette := resources.Get (printf "css/palettes/%s.css" (.Site.Params.theme.palette | default "base16-dark")) }}
+{{ $core := slice
+  (resources.Get "css/colours.css")
+  (resources.Get "css/typography.css")
+  (resources.Get "css/layout.css")
+  (resources.Get "css/header.css")
+  (resources.Get "css/logo.css")
+  (resources.Get "css/about.css")
+  (resources.Get "css/footer.css")
+  (resources.Get "css/risotto.css")
+  (resources.Get "css/custom.css")
+| resources.Concat "css/bundle.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $core.RelPermalink }}" integrity="{{ $core.Data.Integrity }}">
+{{ with $palette }}{{ $p := . | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $p.RelPermalink }}" integrity="{{ $p.Data.Integrity }}">{{ end }}
+{{ with .OutputFormats.Get "rss" -}}
+<link rel="alternate" type="application/rss+xml" href="{{ .Permalink }}" title="{{ site.Title }}">
+{{- end }}
+<meta property="og:title" content="{{ .Title }}">
+<meta property="og:url" content="{{ .Permalink }}">
+{{ with .Description }}<meta property="og:description" content="{{ . }}">{{ end }}
+<meta property="og:locale" content="{{ .Site.Language.Lang }}">
+{{ with .Site.Params.goatcounter }}<script data-goatcounter="{{ . }}" async src="/js/count.js"></script>{{ end }}

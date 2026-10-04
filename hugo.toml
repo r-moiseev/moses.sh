@@ -1,0 +1,75 @@
+baseURL = "https://moses.sh/"
+title = "moses.sh"
+theme = "risotto"
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = false
+enableRobotsTXT = true
+copyright = "Roman Moiseev"
+
+[languages.en]
+label = "EN"
+locale = "en"
+weight = 1
+[languages.en.params.about]
+role = "AI infrastructure & platform"
+city = "Saint Petersburg"
+
+[languages.ru]
+label = "RU"
+locale = "ru"
+weight = 2
+[languages.ru.params.about]
+role = "AI-инфраструктура и платформа"
+city = "Санкт-Петербург"
+
+[taxonomies]
+series = "series"
+
+[outputs]
+home = ["html", "rss"]
+section = ["html"]
+taxonomy = ["html"]
+term = ["html", "rss"]
+
+[params]
+goatcounter = "https://stats.moses.sh/count"
+[params.about]
+name = "Roman Moiseev"
+[params.theme]
+palette = "gruvbox-dark"
+
+# Пустое значение — строки в сайдбаре нет. Заполняются, когда появятся.
+[[params.contacts]]
+key = "telegram_channel"
+url = ""
+[[params.contacts]]
+key = "telegram"
+url = ""
+[[params.contacts]]
+key = "email"
+url = "mailto:me@moses.sh"
+[[params.contacts]]
+key = "github"
+url = "https://github.com/r-moiseev"
+[[params.contacts]]
+key = "linkedin"
+url = ""
+
+[markup.goldmark.renderer]
+unsafe = false
+[markup.tableOfContents]
+startLevel = 2
+endLevel = 3
+
+[services.rss]
+limit = -1
+
+[privacy]
+[privacy.youtube]
+disable = true
+[privacy.x]
+disable = true
+[privacy.instagram]
+disable = true
+[privacy.vimeo]
+disable = true
