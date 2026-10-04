@@ -29,7 +29,7 @@ series = "series"
 home = ["html", "rss"]
 section = ["html"]
 taxonomy = ["html"]
-term = ["html", "rss"]
+term = ["html"]
 
 [params]
 goatcounter = "https://stats.moses.sh/count"

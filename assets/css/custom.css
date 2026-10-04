@@ -7,3 +7,27 @@
 .post-list li { margin: 0.6em 0; }
 .post-list .date { color: var(--muted); }
 .post-list .series { color: var(--off-fg); }
+
+/* Имя и контакты читаются первыми: на узких экранах сайдбар над контентом,
+   на широких — слева. Колонки переопределяем вместе с областями: у темы
+   ширины привязаны к позициям колонок, а не к именам. */
+.page {
+  grid-template-areas: "header" "aside" "body" "footer";
+}
+@media (min-width: 45rem) {
+  .page {
+    grid-template-areas: "header header" "aside body" "footer footer";
+    grid-template-columns: 15rem minmax(0, 1fr);
+  }
+}
+
+/* Сайдбар короткий — держим целиком, без внутреннего скролла. */
+.page__aside {
+  max-height: none;
+  overflow-y: visible;
+}
+
+/* Имя — заголовок, а не строчный текст рядом с логотипом темы. */
+.about__title { display: block; font-size: 1.45rem; line-height: 1.2; margin: 0; }
+.about__role { font-weight: 600; }
+
