@@ -1,0 +1,12 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "moses-sh",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./public",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+  // Кастомный домен включается на запуске (Task 9):
+  // "routes": [{ "pattern": "moses.sh", "custom_domain": true }]
+}

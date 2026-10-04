@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# gitleaks по staged-диффу. gitleaks из PATH или разово через nix.
+set -euo pipefail
+if command -v gitleaks >/dev/null; then GL=gitleaks; else GL="nix run nixpkgs#gitleaks --"; fi
+$GL protect --staged --redact
