@@ -12,7 +12,7 @@ description: "AI infrastructure & platform: agents with access to infrastructure
 
 ## Writing about
 
-- [Trusting an agent with your infrastructure](/series/agent-infra/)
+- [Trusting an agent with your infrastructure](/series/does-not-exist/)
 - [Giving LLMs your own data](/series/own-data/)
 - [Running home infrastructure like production](/series/home-prod/)
 

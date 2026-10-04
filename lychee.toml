@@ -1,0 +1,5 @@
+# Внутренние ссылки по собранному public/. Внешние — отдельным workflow по расписанию.
+offline = true
+root_dir = "public"
+include_fragments = true
+exclude = ['^https?://']
