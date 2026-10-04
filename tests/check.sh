@@ -39,4 +39,9 @@ for f in public/index.xml public/ru/index.xml; do
 done
 grep -q '<content:encoded>' public/ru/index.xml || fail "RU-лента без content:encoded"
 grep -q 'guard-хуки' public/ru/index.xml || grep -q 'Guard-хуки' public/ru/index.xml || fail "RU-лента без заголовка статьи"
+# 404 и RSS-ссылка (финальный ревью)
+test -s public/404.html || fail "404 пустая или отсутствует"
+grep -q 'href="/"' public/404.html || fail "404 без ссылки на главную"
+grep -qE 'href="[^"]*/ru/index.xml"' public/ru/posts/claude-guard-hooks/index.html || fail "на статье RU нет ссылки на RSS"
+grep -qE 'href="[^"]*/index.xml"' public/ru/posts/index.html || fail "в /ru/posts/ нет ссылки на RSS"
 echo "sidebar/head: ok"

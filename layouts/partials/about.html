@@ -7,6 +7,6 @@
   {{ range .Site.Params.contacts }}{{ if .url }}
   <li><a href="{{ .url }}" rel="me">{{ i18n .key }}</a></li>
   {{ end }}{{ end }}
-  {{ with .OutputFormats.Get "rss" }}<li><a href="{{ .Permalink }}">{{ i18n "rss" }}</a></li>{{ end }}
+  {{ with .Site.Home.OutputFormats.Get "rss" }}<li><a href="{{ .Permalink }}">{{ i18n "rss" }}</a></li>{{ end }}
   {{ range .Translations }}<li><a href="{{ .RelPermalink }}" hreflang="{{ .Language.Lang }}">{{ i18n "switch_lang" }}</a></li>{{ end }}
 </ul>
