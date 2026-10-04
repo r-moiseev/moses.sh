@@ -10,7 +10,9 @@ copyright = "Roman Moiseev"
 label = "EN"
 locale = "en"
 weight = 1
+copyright = "Roman Moiseev"
 [languages.en.params.about]
+name = "Roman Moiseev"
 role = "AI infrastructure & platform"
 city = "Saint Petersburg"
 
@@ -18,7 +20,9 @@ city = "Saint Petersburg"
 label = "RU"
 locale = "ru"
 weight = 2
+copyright = "Роман Моисеев"
 [languages.ru.params.about]
+name = "Роман Моисеев"
 role = "AI-инфраструктура и платформа"
 city = "Санкт-Петербург"
 
