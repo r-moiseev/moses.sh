@@ -2,6 +2,9 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "moses-sh",
   "compatibility_date": "2026-10-01",
+  // До запуска сайт закрыт: workers.dev выключен, домен ещё не подключён.
+  // Просмотр локально: hugo server -D -F. На запуске включается routes ниже.
+  "workers_dev": false,
   "assets": {
     "directory": "./public",
     "html_handling": "auto-trailing-slash",
