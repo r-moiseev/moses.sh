@@ -32,4 +32,11 @@ art=public/ru/posts/claude-guard-hooks/index.html
 grep -q 'href="/ru/series/agent-infra/"' $art || fail "в статье нет ссылки на серию"
 grep -q 'Обсудить в Telegram' $art && fail "discuss без значения отрендерился"
 grep -qE 'href="([^"]*)/ru/posts/"' public/ru/index.html || fail "нет ссылки на /ru/posts/ в меню"
+# RSS
+for f in public/index.xml public/ru/index.xml; do
+  python3 -c "import sys,xml.dom.minidom as m; m.parse(sys.argv[1])" $f || fail "$f не валидный XML"
+  grep -q 'xmlns:content="http://purl.org/rss/1.0/modules/content/"' $f || fail "$f без namespace content"
+done
+grep -q '<content:encoded>' public/ru/index.xml || fail "RU-лента без content:encoded"
+grep -q 'guard-хуки' public/ru/index.xml || grep -q 'Guard-хуки' public/ru/index.xml || fail "RU-лента без заголовка статьи"
 echo "sidebar/head: ok"
