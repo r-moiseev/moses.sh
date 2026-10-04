@@ -1,0 +1,15 @@
+{{ define "main" }}
+<div class="content__body">
+  {{ .Content }}
+  {{ $posts := where .Site.RegularPages "Section" "posts" | first 3 }}
+  {{ with $posts }}
+  <h2 id="recent">{{ i18n "recent" }}</h2>
+  <ul class="post-list">
+    {{ range . }}
+    <li><span class="date">{{ .Date.Format "2006-01-02" }}</span> · <a href="{{ .RelPermalink }}">{{ .Title }}</a>{{ with .Description }} — {{ . }}{{ end }}</li>
+    {{ end }}
+  </ul>
+  {{ end }}
+</div>
+{{ end }}
+{{ define "aside" }}{{ end }}
