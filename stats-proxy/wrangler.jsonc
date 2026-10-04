@@ -1,0 +1,7 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "moses-sh-stats",
+  "main": "index.ts",
+  "compatibility_date": "2026-10-01",
+  "routes": [{ "pattern": "stats.moses.sh", "custom_domain": true }]
+}

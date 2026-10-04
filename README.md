@@ -15,6 +15,7 @@ Hugo 0.164.0 extended (pinned in CI).
 - `content/series/<slug>/_index.{en,ru}.md` — series descriptions
 - `layouts/` — overrides of the theme; the theme itself is a submodule and is not modified
 - `static/js/count.js` — GoatCounter client, self-hosted copy of https://gc.zgo.at/count.js
+- `stats-proxy/` — Worker on `stats.moses.sh` proxying to `moses.goatcounter.com` (direct CNAME flaps from Russia)
 
 ## License
 
