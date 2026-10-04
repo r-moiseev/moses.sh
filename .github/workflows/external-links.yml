@@ -1,0 +1,22 @@
+name: external-links
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          submodules: true
+      - uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: "0.164.0"
+          extended: true
+      - run: hugo --minify
+      - uses: lycheeverse/lychee-action@v2
+        with:
+          args: --root-dir public 'public/**/*.html'
+          fail: true
