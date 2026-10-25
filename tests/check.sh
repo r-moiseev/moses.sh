@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
-# Проверки по собранному public/. Запуск: hugo -D -F --panicOnWarning && tests/check.sh
-# -F только локально: статья 1.1 датирована днём запуска (2026-11-02), без -F не собирается.
-# CI собирает без -D и без -F: черновики и будущие даты в прод не попадают.
+# Проверки по собранному public/. Запуск: hugo --cleanDestinationDir --panicOnWarning && tests/check.sh
+# Production-режим: черновики и будущие даты не публикуются.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 fail() { echo "FAIL: $*" >&2; exit 1; }
@@ -16,34 +15,21 @@ grep -q 'data-goatcounter="https://stats.moses.sh/count"' $idx || fail "нет e
 grep -q 'href="/ru/"' $idx || fail "нет переключателя на /ru/"
 grep -q 'href="/"' public/ru/index.html || fail "нет переключателя на / из RU"
 grep -q 'rel="alternate" type="application/rss+xml"' $idx || fail "нет ссылки на RSS"
+grep -q '(in progress)' $idx && fail "главная EN: анонс несуществующего кода"
+grep -q '(в работе)' public/ru/index.html && fail "главная RU: анонс несуществующего кода"
 grep -q '<h2 id="what-i-do">' $idx || fail "главная: нет блока what-i-do"
 grep -q '<h2 id="writing-about">' $idx || fail "главная: нет блока writing-about"
-grep -q '<h2 id="code">' $idx || fail "главная: нет блока code"
 grep -q '<h2 id="чем-занимаюсь">' public/ru/index.html || fail "главная RU: нет блока"
-grep -c '<li>' $idx | awk '$1 < 10 {exit 1}' || fail "главная: меньше 10 буллетов"
-# Статьи и серии
-test -f public/ru/posts/claude-guard-hooks/index.html || fail "RU-статья не собралась"
-test -f public/posts/claude-guard-hooks/index.html && fail "EN-страница статьи без EN-версии не должна существовать"
-test -f public/ru/series/agent-infra/index.html || fail "нет страницы серии RU"
-test -f public/series/agent-infra/index.html || fail "нет страницы серии EN"
-grep -q 'claude-guard-hooks' public/index.xml && fail "RU-статья попала в EN-ленту"
-grep -q 'claude-guard-hooks' public/ru/index.xml || fail "RU-статья не попала в RU-ленту"
-art=public/ru/posts/claude-guard-hooks/index.html
-grep -q 'href="/ru/series/agent-infra/"' $art || fail "в статье нет ссылки на серию"
-grep -q 'Обсудить в Telegram' $art && fail "discuss без значения отрендерился"
-grep -qE 'href="([^"]*)/ru/posts/"' public/ru/index.html || fail "нет ссылки на /ru/posts/ в меню"
+test ! -f public/series/index.html || fail "пустой индекс серий EN"
+test ! -f public/ru/series/index.html || fail "пустой индекс серий RU"
 # RSS
 for f in public/index.xml public/ru/index.xml; do
   python3 -c "import sys,xml.dom.minidom as m; m.parse(sys.argv[1])" $f || fail "$f не валидный XML"
   grep -q 'xmlns:content="http://purl.org/rss/1.0/modules/content/"' $f || fail "$f без namespace content"
 done
-grep -q '<content:encoded>' public/ru/index.xml || fail "RU-лента без content:encoded"
-grep -q 'guard-хуки' public/ru/index.xml || grep -q 'Guard-хуки' public/ru/index.xml || fail "RU-лента без заголовка статьи"
 # 404 и RSS-ссылка (финальный ревью)
 test -s public/404.html || fail "404 пустая или отсутствует"
 grep -q 'href="/"' public/404.html || fail "404 без ссылки на главную"
-grep -qE 'href="[^"]*/ru/index.xml"' public/ru/posts/claude-guard-hooks/index.html || fail "на статье RU нет ссылки на RSS"
-grep -qE 'href="[^"]*/index.xml"' public/ru/posts/index.html || fail "в /ru/posts/ нет ссылки на RSS"
 grep -q 'Роман Моисеев' public/ru/index.html || fail "RU: имя не переведено"
 grep -q 'Roman Moiseev' public/ru/index.html && fail "RU: английское имя на странице"
 grep -q 'Roman Moiseev' public/index.html || fail "EN: имени нет"

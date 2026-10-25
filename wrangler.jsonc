@@ -2,14 +2,12 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "moses-sh",
   "compatibility_date": "2026-10-01",
-  // До запуска сайт закрыт: workers.dev выключен, домен ещё не подключён.
-  // Просмотр локально: hugo server -D -F. На запуске включается routes ниже.
+  // Production uses only the custom domain; preview locally with hugo server.
   "workers_dev": false,
   "assets": {
     "directory": "./public",
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "404-page"
-  }
-  // Кастомный домен включается на запуске (Task 9):
-  // "routes": [{ "pattern": "moses.sh", "custom_domain": true }]
+  },
+  "routes": [{ "pattern": "moses.sh", "custom_domain": true }]
 }

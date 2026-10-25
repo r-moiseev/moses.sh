@@ -5,9 +5,16 @@ Personal site: AI infrastructure & platform notes. Hugo + [Risotto](https://gith
 ## Local
 
     git submodule update --init
-    hugo server -D
+    hugo server
 
 Hugo 0.164.0 extended (pinned in CI).
+
+## Checks
+
+    hugo --cleanDestinationDir --panicOnWarning && tests/check.sh
+    hugo --cleanDestinationDir --minify --panicOnWarning
+    lychee --config lychee.toml 'public/**/*.html'
+    lychee --config lychee-external.toml 'public/**/*.html'
 
 ## Layout
 

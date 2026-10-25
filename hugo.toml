@@ -4,6 +4,7 @@ theme = "risotto"
 defaultContentLanguage = "en"
 defaultContentLanguageInSubdir = false
 enableRobotsTXT = true
+disableKinds = ["taxonomy"]
 copyright = "Roman Moiseev"
 
 [languages.en]
@@ -32,7 +33,6 @@ series = "series"
 [outputs]
 home = ["html", "rss"]
 section = ["html"]
-taxonomy = ["html"]
 term = ["html"]
 
 [params]
@@ -42,22 +42,12 @@ name = "Roman Moiseev"
 [params.theme]
 palette = "gruvbox-dark"
 
-# Пустое значение — строки в сайдбаре нет. Заполняются, когда появятся.
-[[params.contacts]]
-key = "telegram_channel"
-url = ""
-[[params.contacts]]
-key = "telegram"
-url = ""
 [[params.contacts]]
 key = "email"
 url = "mailto:me@moses.sh"
 [[params.contacts]]
 key = "github"
 url = "https://github.com/r-moiseev"
-[[params.contacts]]
-key = "linkedin"
-url = ""
 
 [markup.goldmark.renderer]
 unsafe = false
